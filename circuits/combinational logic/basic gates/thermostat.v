@@ -12,3 +12,13 @@ module top_module (
     assign fan = (fan_on == 1 || heater == 1 || aircon == 1) ? 1'b1:1'b0;
 
 endmodule
+
+//alternate
+assign fan = heater | aircon | fan_on;
+	
+	// Heater is on when it's too cold and mode is "heating".
+	assign heater = (mode & too_cold);
+	
+	// Aircon is on when it's too hot and mode is not "heating".
+	assign aircon = (~mode & too_hot);
+	
